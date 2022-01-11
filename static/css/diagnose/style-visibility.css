@@ -1,0 +1,27 @@
+/*microphone button active border */
+#btn_onclick_border {
+  visibility: hidden;
+}
+
+/* Upper body - coughing message */
+#msg_before_coughing{
+  display: flex;
+}
+
+#msg_first_coughing,
+#msg_first_cough_done,
+#msg_second_coughing,
+#msg_second_cough_done,
+#msg_third_coughing,
+#msg_third_cough_done{
+  display: none;
+}
+
+/* Lower body - microphone or view result */
+#div_recording{
+  display: flex;
+}
+
+#div_view_result{
+  display: none;
+}

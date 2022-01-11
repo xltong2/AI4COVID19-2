@@ -1,0 +1,17 @@
+
+ .history-item {
+    background: #183E83;
+    border-radius: 20px;
+    display: flex;
+    height: 80px;
+    width:  auto;
+    padding: 20px;
+    margin: 20px;
+
+    display: flex;
+    flex-direction: column;
+    vertical-align: middle;
+    font: Arial, Helvetica, sans-serif;
+    color: white;
+    font-size: 16px;
+}

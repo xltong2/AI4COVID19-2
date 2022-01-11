@@ -1,0 +1,135 @@
+/* Body section  */
+
+.body-container {
+  display: flex;
+  flex-direction: column;
+  /*justify-content: flex-start;*/
+}
+
+/* Body container  */
+
+.body-container > div {
+  height: calc(50vh - 32.5px);
+}
+
+.body-upper-container > div {
+  padding-bottom: 20px;
+}
+
+.body-upper-grid {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.body-upper-grid-item {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin: auto;
+}
+
+.body-upper-grid-item > span {
+  font-family: "Segoe UI";
+  font-size: 18px;
+}
+
+#img_wave {
+  height: 100px;
+  margin: 50px 0;
+}
+
+.span-recording-done {
+  color: green;
+  margin: 95px 0;
+}
+
+.body-lower-container {
+  background-color: rgba(107,168,234,255);
+  border-radius: 30px 30px 0 0;
+}
+
+.body-lower-recording {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.body-lower-recording > span {
+  position: absolute;
+  padding-top: 250px;
+  font-family: "Arial";
+  font-size: 16px;
+  font-weight: bold;
+  color: white;
+}
+
+#btn_onclick_border {
+  position: absolute;
+  z-index: 1;
+  width: 210px;
+  height: 210px;
+  background-color: rgba(153,204,255,255);
+  border-radius: 50%;
+}
+
+#btn_microphone {
+  position: absolute;
+  z-index: 2;
+  width: 175px;
+  height: 180px;
+  border: none;
+  border-radius: 50%;
+}
+
+#btn_microphone > img {
+  z-index: 2;
+  width: 175px;
+  height: 180px;
+}
+
+.body-lower-view-result {
+  height: 80%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+/* 
+.body-lower-view-result > button {
+  margin: auto;
+  position: absolute;
+  top: calc(100vh - 150px); left: 0; bottom: 0; right: 0;
+  border: none;
+  color: white;
+  background-color: rgba(22,43,75,255);
+  width: 80%;
+  height: 50px;
+  border-radius: 50px;
+  font-family: "Segoe UI";
+  font-size: 14px;
+} */
+
+
+.body-lower-view-result > a {
+  margin: auto;
+  position: fixed;
+  top: calc(100vh - 150px); left: 0; bottom: 0; right: 0;
+  width: 80%;
+  height: 50px;
+  border-radius: 50px;
+  background-color: rgba(22,43,75,255);
+  text-decoration: none;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: "Segoe UI";
+  font-size: 14px;
+}

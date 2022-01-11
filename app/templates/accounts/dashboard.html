@@ -1,0 +1,65 @@
+{% extends './snippets/appBar-and-bottomBar.html' %}
+
+{% comment %} Page title {% endcomment %}
+{% block title %}Dashboard{% endblock %}
+
+{% comment %} appBar title {% endcomment %}
+{% block appBarTitle %}Dashboard{% endblock %}
+
+{% comment %} included css and javascript {% endcomment %}
+{% block file %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/dashboard/style.css' %}">
+{% endblock %}
+
+{% comment %} body content {% endcomment %}
+{% block content %}
+{% load static %}
+<div class="body-container">
+    <div class="img-header">
+        <img src="{% static 'images/dashboard/mainMenuVirus.svg' %}" alt="Header">
+        <h3>Welcome back,<br>{{ user.username }}</h3>
+    </div>
+    <div class="text">
+        <h3>What do you want to do?</h3>
+    </div>
+    <div class="buttons">
+        <div class="button">
+            <a href="{% url 'diagnose' %}">
+            <img src="{% static 'images/dashboard/iconCough.png' %}" alt="DiagCough" width="50">
+            <h5>Diagnose</h5>
+        </div>
+        <div class="button">
+            <a href="{% url 'history' %}">
+            <img src="{% static 'images/dashboard/iconRecord.png' %}" alt="History" width="50">
+            <h5>History</h5>
+        </div>
+        <div class="button">
+            <a href="{% url 'profile' %}">
+            <img src="{% static 'images/dashboard/iconUser.png' %}" alt="Profile" width="50">
+            <h5>Profile</h5>
+        </div>
+    </div>
+    {% comment %} <div class="maps">
+        <div class="map">
+            <div class="googleMap">
+                <img src="{% static 'images/dashboard/maps.jpg' %}" alt="Maps" width="300">
+            </div>  
+        </div>
+    </div>
+    <div class="maps">
+        <div class="map">
+            <div class="googleMap">
+                <img src="{% static 'images/dashboard/maps.jpg' %}" alt="Maps" width="300">
+            </div>  
+        </div>
+    </div>
+    <div class="maps">
+        <div class="map">
+            <div class="googleMap">
+                <img src="{% static 'images/dashboard/maps.jpg' %}" alt="Maps" width="300">
+            </div>  
+        </div>
+    </div> {% endcomment %}
+</div>
+{% endblock %}

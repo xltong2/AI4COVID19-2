@@ -1,0 +1,61 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width,height=device-height,initial-scale=1.0" />
+	<title>{% block title %}{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/preload/onload.css' %}">
+    <link rel="stylesheet" href="{% static 'css/appBar-and-bottomBar/style.css' %}">
+    {% block file %}
+    {% endblock %}
+</head>
+<body {% block preload %}{% endblock %}>
+    <!-- appBar -->
+    {% block appBar %}
+    <div class='appbar-container'>
+		<div class='appbar-grid'>
+			<div class='appbar-grid-item'>
+				<h2>{% block appBarTitle %}{% endblock %}</h2>
+			</div>
+			<div class='appbar-grid-item'>
+                {% block appBarAction %}<img/>{% endblock %}
+			</div>
+		</div>
+	</div>
+    {% endblock %}
+
+    <!-- body -->
+    {% block content %}
+    <div class="body-container"></div>
+    {% endblock %}
+
+    <!-- bottomBar -->
+    {% block bottomBar %}
+    <div class="bottomBar-container">
+        <a href="{% url 'dashboard' %}" class="bottomBar-item">
+            <img src="{% static 'images/appBar-and-bottomBar/bottomBar-home-icon.svg' %}">
+            <span>Home</span>
+        </a>
+        <a href="{% url 'clinic-nearby' %}" class="bottomBar-item">
+            <img src="{% static 'images/appBar-and-bottomBar/bottomBar-clinic-icon.svg' %}">
+            <span>Nearby Clinic</span>
+        </a>
+        <a href="{% url 'diagnose' %}" class="bottomBar-item middle-item">
+            <div class="bottomBar-midCircle"></div>
+            <img src="{% static 'images/appBar-and-bottomBar/bottomBar-test-icon.svg' %}">
+            <div id="image_placeholder"></div>
+            <span>Diagnose</span>
+        </a>
+        <a href="{% url 'history' %}" class="bottomBar-item">
+            <img src="{% static 'images/appBar-and-bottomBar/bottomBar-history-icon.svg' %}">
+            <span>History</span>
+        </a>
+        <a href="{% url 'profile' %}" class="bottomBar-item">
+            <img src="{% static 'images/appBar-and-bottomBar/bottomBar-user-icon.svg' %}">
+            <span>Profile</span>
+        </a>
+    </div>
+    {% endblock %}
+</body>
+</html>

@@ -1,0 +1,21 @@
+{% extends './snippets/appBar-and-bottomBar.html' %}
+
+{% comment %} Page title {% endcomment %}
+{% block title %}Clinic nearby{% endblock %}
+
+{% comment %} appBar title {% endcomment %}
+{% block appBarTitle %}Clinic nearby{% endblock %}
+
+{% comment %} included css and javascript {% endcomment %}
+{% block file %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/clinic-nearby/style.css' %}">
+{% endblock %}
+
+{% comment %} body content {% endcomment %}
+{% block content %}
+{% load static %}
+<div class='body-container'>
+    <iframe class="map" src="https://www.google.com/maps/d/u/0/embed?mid=1dMgdhqwuNxe3CN8K5VFe6yWqIyhvuNeG"></iframe>
+</div>
+{% endblock %}

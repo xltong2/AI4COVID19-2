@@ -1,0 +1,52 @@
+.back-shadow {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.6) ;
+    z-index: 20;
+}
+
+.menu-drawer-container {
+    display: none;
+    justify-content: center;
+}
+
+.menu-drawer-box {
+    height: 100vh;
+    width: 300px;
+    float: right;
+    background-color: #162B4B;
+    z-index: 21;
+}
+
+.menu-drawer-grid {
+    display: flex;
+    flex-direction: column;
+}
+
+.menu-drawer-grid-item {
+    /* border: solid; */
+    display: flex;
+    flex-direction: row-reverse;
+    margin-right: 30px;
+    height: 45px;
+}
+
+.menu-drawer-grid-item > a {
+    text-decoration: none;
+    color: white;
+}
+
+.menu-drawer-action {
+    align-items: center;
+    height: 65px;
+}
+
+.menu-drawer-action > a > img {
+    height: 25px;
+}
+
+.first-item {
+    margin-top: 30px;
+}
