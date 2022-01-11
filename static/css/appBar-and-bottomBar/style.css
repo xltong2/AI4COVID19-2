@@ -1,0 +1,80 @@
+/* appBar */
+.appbar-container {
+    position: fixed;
+    z-index: 10;
+    height: 65px;
+    width: 100%;
+    background-color: rgba(107,168,234,255);
+    box-shadow: 0px 0px 10px rgba(0,0,0,0.35);
+}
+  
+.appbar-grid {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: rgb(255, 255, 255);
+    height: 100%;
+    margin: 0 30px;
+}
+  
+  .appbar-grid-item > a > img {
+    height: 25px;
+}
+
+.body-container {
+    padding-top: 65px;
+}
+
+/* bottomBar */
+
+.bottomBar-container {
+    position: fixed;
+    display: flex;
+    z-index: 10;
+    bottom: 0;
+    width: 100%;
+    height: 55px;
+    background-color: #6BA8EA ;
+    box-shadow: 0px 0px 10px rgba(0,0,0,0.35);
+}
+
+.bottomBar-midCircle {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #162B4B;
+    height: 105px;
+    width: 105px;
+    border-radius: 50%;
+    bottom: -20px;
+    z-index: 11;
+}
+
+.bottomBar-item {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex-grow: 1;
+    font-size: 13px;
+    color: #ffffff;
+    text-decoration: none;
+}
+
+.bottomBar-item > img, .bottomBar-item > span {
+    z-index: 12;
+}
+
+.middle-item > img {
+    position: fixed;
+    transform: translateY(-20px);
+    width: 45px;
+}
+
+#image_placeholder {
+    width: 25px;
+    height: 25px;
+}

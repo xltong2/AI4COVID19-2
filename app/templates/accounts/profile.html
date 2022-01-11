@@ -1,0 +1,112 @@
+{% extends './snippets/appBar-and-bottomBar.html' %}
+
+{% comment %} Page title {% endcomment %}
+{% block title %}Profile{% endblock %}
+
+{% comment %} appBar title {% endcomment %}
+{% block appBarTitle %}Profile{% endblock %}
+
+{% comment %} appBar action {% endcomment %}
+{% block appBarAction %}
+{% load static %}
+<a href="#">
+	<img id='btnDrawer' src="{% static 'images/appBar-and-bottomBar/appBar-menu-icon.png' %}">
+</a>
+{% endblock %}
+
+{% comment %} included css and javascript {% endcomment %}
+{% block file %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/profile/style.css' %}" />
+<link rel="stylesheet" href="{% static 'css/profile/popup-window.css' %}" />
+<link rel="stylesheet" href="{% static 'css/profile/menu-drawer.css' %}" />
+<script type="text/javascript" src="{% static 'js/profile/profile.js' %}"></script>
+{% endblock %}
+
+{% comment %} body preload {% endcomment %}
+{% block preload %}onload = "Init()"{% endblock %}
+
+{% comment %} body content {% endcomment %}
+{% block content %}
+{% load static %}
+<div class="body-container">
+
+    <!-- menu drawer -->
+    <div class="menu-drawer-container back-shadow">
+        <div class="menu-drawer-box">
+            <div class="menu-drawer-grid">
+                <div class="menu-drawer-grid-item menu-drawer-action">
+                    <a href="#">
+                        <img id='btnDrawerInside' src="{% static 'images/appBar-and-bottomBar/appBar-menu-icon.png' %}">
+                    </a>
+                </div>
+                <div class="menu-drawer-grid-item first-item">
+                    <a href="{% url 'change-password' %}">
+                        <span>Change password</span>
+                    </a>
+                </div>
+                <div class="menu-drawer-grid-item">
+                    <a href="#">
+                        <span>Change username</span>
+                    </a>
+                </div>
+                <div class="menu-drawer-grid-item">
+                    <a href="#">
+                        <span>Change email</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- signout popup window -->
+    <div class="popup-container back-shadow">
+        <div class="popup-content">
+            <div id="windowSignOut">
+                <h2>Sign Out?</h2>
+            </div>
+            <div id="windowText">
+                <p>
+                    Sign out will launch welcome wizard.<br> 
+                    Your account will be signed out from the device.
+                </p>
+            </div>
+            <div class="btnWindowSignOut">
+                <a href="{% url 'logout' %}" class="btnSignout">Sign Out</a>
+                <a href="#" id="btnPopupCancel">Cancel</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- profile image -->
+    <div class="image-container">
+        <img src="{% static 'images/profile/user.png' %}"/>
+    </div>
+
+    <!-- profile info -->
+    <div class="lower-container">
+        <div class="user-icon">
+            <img src="{% static 'images/profile/user-solid.svg' %}" alt="DiagCough" width="20"> &nbsp; &nbsp; &nbsp; &nbsp; N/A
+        </div>
+        <div class="user-icon">
+            <img src="{% static 'images/profile/circle-user-solid.svg' %}" alt="DiagCough" width="20"> &nbsp; &nbsp; &nbsp; &nbsp; {{ user.username }}
+        </div>
+            <div class="user-icon">
+            <img src="{% static 'images/profile/envelope-solid.svg' %}" alt="DiagCough" width="20"> &nbsp; &nbsp; &nbsp; &nbsp; {{ user.email }}
+        </div>
+            <div class="user-icon">
+            <img src="{% static 'images/profile/phone-solid.svg' %}" alt="DiagCough" width="20"> &nbsp; &nbsp; &nbsp; &nbsp; N/A
+        </div>
+            <div class="user-icon">
+            <img src="{% static 'images/profile/lock-solid.svg' %}" alt="DiagCough" width="20"> &nbsp; &nbsp; &nbsp; &nbsp; N/A
+        </div>
+    </div>
+
+    <!-- bottom button -->
+    <div class="button-container">
+        <button id="btnBack">BACK</button>
+        <button id="btnSignOut">SIGN OUT</button>
+    </div>
+
+</div>
+{% endblock %}

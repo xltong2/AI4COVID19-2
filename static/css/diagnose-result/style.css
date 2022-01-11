@@ -1,0 +1,96 @@
+/* Body section  */
+
+/* .body-container {
+} */
+
+.body-grid {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.body-grid-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding-bottom: 40px;
+  font-family: "Segoe UI";
+  font-size: 14px;
+  /*border: solid;*/
+
+}
+
+.first-body-item {
+  padding-top: 100px;
+  padding-bottom: 10px;
+  font-weight: bold;
+}
+
+.confirm-covid-box {
+  width: 60%;
+  height:  50px;
+  background-color: rgba(0, 255, 0, 1.0);
+  color: white;
+  border-radius: 50px;
+}
+
+.confirm-covid-box > span {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  font-weight: bold;
+}
+
+.safety-grid {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width:  calc(80% - 30px);
+  background-color: rgba(233, 233, 233, 1.0);
+  border-radius: 30px;
+}
+
+.safety-grid-item {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin: 7.5px 15px;
+  padding: 10px;
+  background-color: rgba(255, 255, 255, 1.0);
+  border-radius: 50px;
+  font-weight: bold;
+}
+
+.safety-grid-item > img {
+  margin-left: 5px;
+  margin-right: 15px;
+}
+
+.first-safety-item {
+  margin-top: 15px;
+}
+
+.last-safety-item {
+  margin-bottom: 15px;
+}
+
+/* Float action button */
+.floataction-container > a {
+  margin: auto;
+  position: fixed;
+  top: calc(100vh - 150px); left: 0; bottom: 0; right: 0;
+  width: 80%;
+  height: 50px;
+  border-radius: 50px;
+  background-color: rgba(22,43,75,255);
+  text-decoration: none;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: "Segoe UI";
+  font-size: 14px;
+}

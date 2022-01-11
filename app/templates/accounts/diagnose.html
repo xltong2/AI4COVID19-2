@@ -1,0 +1,113 @@
+{% extends './snippets/appBar-and-bottomBar.html' %}
+
+{% comment %} Page title {% endcomment %}
+{% block title %}Diagnose{% endblock %}
+
+{% comment %} appBar title {% endcomment %}
+{% block appBarTitle %}Diagnose{% endblock %}
+
+{% comment %} appBar action {% endcomment %}
+{% block appBarAction %}
+{% load static %}
+<a href="{% url 'dashboard' %}">
+	<img id='btn_back' src="{% static 'images/appBar-and-bottomBar/appBar-twisted-back-icon.png' %}">
+</a>
+{% endblock %}
+
+{% comment %} included css and javascript {% endcomment %}
+{% block file %}
+{% load static %}
+<link rel='stylesheet' href="{% static 'css/diagnose/style.css' %}">
+<link rel='stylesheet' href="{% static 'css/diagnose/style-visibility.css' %}">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+{% comment %} <script type="text/javascript" src="{% static 'js/diagnose/diagnose.js' %}"></script> {% endcomment %}
+{% endblock %}
+
+{% comment %} disable bottomBar {% endcomment %}
+{% block bottomBar %}{% endblock %}
+
+{% comment %} body preload {% endcomment %}
+{% block preload %}{% endblock %}
+
+{% comment %} body content {% endcomment %}
+{% block content %}
+{% load static %}
+<div class='body-container'>
+	<!-- White screen area of body -->
+	<div class='body-upper-container'>
+		<div class='body-upper-grid'>
+
+			<!-- Before coughing message -->
+			<div id='msg_before_coughing' class='body-upper-grid-item'>
+				<span>HOLD THE BUTTON TO START</span>
+			</div>
+
+			<!-- First coughing message -->
+			<div id='msg_first_coughing' class='body-upper-grid-item'>
+				<span>FIRST COUGH</span>
+				<img id='img_wave' src="{% static 'images/diagnose/wave-img.png' %}">
+				<span>RECORDING...</span>
+			</div>
+
+			<!-- First cough done message -->
+			<div id='msg_first_cough_done' class='body-upper-grid-item'>
+				<span>FIRST COUGH</span>
+				<span class='span-recording-done'>RECORDING DONE</span>
+				<span id='audio_first_coughing'></span>
+				<span>READY TO SECOND COUGH</span>
+			</div>
+
+			<!-- Second coughing message -->
+			<div id='msg_second_coughing' class='body-upper-grid-item'>
+				<span>SECOND COUGH</span>
+				<img id='img_wave' src="{% static 'images/diagnose/wave-img.png' %}">
+				<span>RECORDING...</span>
+			</div>
+
+			<!-- Second cough done message -->
+			<div id='msg_second_cough_done' class='body-upper-grid-item'>
+				<span>SECOND COUGH</span>
+				<span class='span-recording-done'>RECORDING DONE</span>
+				<span id='audio_second_coughing'></span>
+				<span>READY TO THIRD COUGH</span>
+			</div>
+
+			<!-- Third coughing message -->
+			<div id='msg_third_coughing' class='body-upper-grid-item'>
+				<span>THIRD COUGH</span>
+				<img id='img_wave' src="{% static 'images/diagnose/wave-img.png' %}">
+				<span>RECORDING...</span>
+			</div>
+
+			<!-- Third cough done message -->
+			<div id='msg_third_cough_done' class='body-upper-grid-item'>
+				<span>THIRD COUGH</span>
+				<span class='span-recording-done'>RECORDING DONE</span>
+				<span id='audio_third_coughing'></span>
+				<span>VIEW DIAGNOSE RESULT</span>
+			</div>
+		</div>
+	</div>
+	<!-- Recording area of body -->
+	<div class='body-lower-container'>
+
+		<!-- Recording section -->
+		<div id='div_recording' class='body-lower-recording'>
+			<div id='btn_onclick_border'></div>
+				<button id='btn_microphone'>
+					<img src="{% static 'images/diagnose/voice-rec.png' %}">
+				</button>
+			<span>HOLD TO RECORD</span>
+		</div>
+		<!-- Viewing result section -->
+		<div id='div_view_result' class='body-lower-view-result'>
+			<img src="{% static 'images/diagnose/view-result.png' %}">
+			<a href="{% url 'diagnose-result' %}">
+				<span>VIEW RESULT</span>
+			</a>
+		</div>
+	</div>
+</div>
+<script src="{% static 'js/diagnose/diagnose.js' %}"></script>
+<script src="{% static 'js/diagnose/recorder.js' %}"></script>
+{% endblock %}
