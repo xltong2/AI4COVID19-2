@@ -25,3 +25,7 @@
 #div_view_result{
   display: none;
 }
+
+#view_result {
+  display: none;
+}

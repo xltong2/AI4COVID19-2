@@ -42,6 +42,21 @@
   height: 100%;
   font-weight: bold;
 }
+.confirm-covid-box2 {
+  width: 60%;
+  height:  50px;
+  background-color: rgba(255, 0, 0, 1.0);
+  color: white;
+  border-radius: 50px;
+}
+
+.confirm-covid-box2 > span {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  font-weight: bold;
+}
 
 .safety-grid {
   display: flex;
@@ -93,4 +108,13 @@
   align-items: center;
   font-family: "Segoe UI";
   font-size: 14px;
+}
+
+iframe {
+  width:  calc(80% - 30px);
+  background-color: rgba(233, 233, 233, 1.0);
+  border-radius: 30px;
+  height: calc(500px);
+  border: none;
+  margin-bottom: 100px;
 }

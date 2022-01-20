@@ -133,3 +133,7 @@
   font-family: "Segoe UI";
   font-size: 14px;
 }
+
+#processing_result {
+  background-color: rgba(188,188,188,255);
+}

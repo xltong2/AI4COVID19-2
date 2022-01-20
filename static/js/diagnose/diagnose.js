@@ -17,6 +17,8 @@ var audioThirdChoughing;
 var divRecording;
 var divShowResult;
 var btnBack;
+var processingResult;
+var viewResult;
 
 var audio_context;
 var recorder;
@@ -145,6 +147,10 @@ function Visibility () {
             divRecording.style.display = "none";
             divShowResult.style.display = "flex";
             btnBack.style.display = "none";
+            setTimeout(function () {
+                processingResult.style.display = "none";
+                viewResult.style.display = "flex";
+            }, 10000);
             break;
     }
 }
@@ -169,6 +175,8 @@ window.onload = function Init() {
     divRecording = document.getElementById ("div_recording");
     divShowResult = document.getElementById ("div_view_result");
     btnBack = document.getElementById ('btn_back');
+    processingResult = document.getElementById("processing_result");
+    viewResult = document.getElementById("view_result");
 
     try {
       window.AudioContext = window.AudioContext || window.webkitAudioContext;

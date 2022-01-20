@@ -1,3 +1,4 @@
+import os
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib.auth import authenticate, login, logout
@@ -8,8 +9,10 @@ from django.core.files.storage import FileSystemStorage
 from django.core.files import File
 
 from app.forms import RegistrationForm, AccountAuthenticationForm
-from app.models import Account
+from app.models import Account, get_coughing_audio_filepath
 from app.forms import AudioForm
+
+from .knn.core import main
 
 def welcome_view(request):
     context = {}
@@ -109,6 +112,9 @@ def test(request):
     context = {}
     return render(request, 'accounts/test.html', context)    
 
+# global variable for diagnose_code
+diagnose_code = 0
+
 @csrf_exempt
 def diagnose_view(request):
     # request should be ajax and method should be POST.
@@ -119,26 +125,26 @@ def diagnose_view(request):
         # delete old audio
         request.user.coughing_audio.delete()
         
-        
         # recieve audio blob from ajax
         file = request.FILES.get('audio')
-        print(file)
+        print(f'ajax file recieved: {file}')
                 
         # save audio to user model
         request.user.coughing_audio.save("coughing_audio.wav", file)
         request.user.save()
         
+        # ready for KNN identifier
+        # 1=healthy, 2=symtomatic
+        audio_path = os.path.join(settings.BASE_DIR, f'media_cdn\coughing_audio\{request.user.pk}')
+        diagnose_code = main("coughing_audio.wav", audio_path)
+        # request.user.diagnose_code = 2
+        request.user.diagnose_code = diagnose_code
+        request.user.save()
         
-        # get the form data
-        # audioForm = AudioForm(request.POST)
-        # reqAudio = request.POST.get('formData')
-        # # save the data and after fetch the object in instance
-        # if audioForm.is_valid():
-        #     audioForm.save()
-        # # else:
-        #     audioForm = AudioForm()
-        
-    context = {}
+        context = {}    
+        return render(request, 'accounts/diagnose.html', context)
+    
+    context = {}    
     return render(request, 'accounts/diagnose.html', context)
 
 def diagnose_result_view(request):

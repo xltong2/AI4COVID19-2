@@ -18,6 +18,7 @@
 {% comment %} body content {% endcomment %}
 {% block content %}
 {% load static %}
+{% if user.diagnose_code == '1' %}
 <div class='body-container'>
 	<div class='body-grid'>
 		<div class='body-grid-item first-body-item'>
@@ -54,6 +55,39 @@
 		</div>
 	</div>
 </div>
+{% elif user.diagnose_code == '2' %}
+<div class='body-container'>
+	<div class='body-grid'>
+		<div class='body-grid-item first-body-item'>
+			<span>The result is...</span>
+		</div>
+		<div class='body-grid-item'>
+			<div class='confirm-covid-box2'>
+				<span>COVID-19 likely</span>
+			</div>
+		</div>
+		<div class='body-grid-item'>
+			<div class='safety-grid'>
+				<div class='safety-grid-item first-safety-item'>
+					<img src="{% static 'images/diagnose-result/home-icon.png' %}">
+					<span>Go to the nearest clinic for further action.</span>
+				</div>
+				<div class='safety-grid-item'>
+					<img src="{% static 'images/diagnose-result/social-distance-icon.png' %}">
+					<span>Keep distancing yourself from others.</span>
+				</div>
+				<div class='safety-grid-item last-safety-item'>
+					<img src="{% static 'images/diagnose-result/no-working-icon.png' %}">
+					<span>Keep on wear a mask to avoid virus spread to others.</span>
+				</div>
+			</div>
+		</div>
+		<div class='body-grid-item'>
+			<iframe class="map" src="https://www.google.com/maps/d/u/0/embed?mid=1dMgdhqwuNxe3CN8K5VFe6yWqIyhvuNeG"></iframe>
+		</div>
+	</div>
+</div>
+{% endif %}
 <!-- Float action button - dashboard -->
 <div class='floataction-container'>
 	<a href="{% url 'dashboard' %}">

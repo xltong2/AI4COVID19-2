@@ -102,7 +102,12 @@
 		<!-- Viewing result section -->
 		<div id='div_view_result' class='body-lower-view-result'>
 			<img src="{% static 'images/diagnose/view-result.png' %}">
-			<a href="{% url 'diagnose-result' %}">
+			<!-- Processing result -->
+			<a href="#" id='processing_result'>
+				<span>PROCESSING RESULT, PLEASE WAIT...</span>
+			</a>
+			<!-- View result -->
+			<a href="{% url 'diagnose-result' %}" id='view_result'>
 				<span>VIEW RESULT</span>
 			</a>
 		</div>
