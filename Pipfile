@@ -6,6 +6,15 @@ name = "pypi"
 [packages]
 django = "*"
 django-debug-toolbar = "*"
+dj-database-url = "*"
+gunicorn = "*"
+psycopg2-binary = "*"
+pillow = "*"
+keras = "*"
+pandas = "*"
+librosa = "*"
+comet-ml = "*"
+tensorflow-cpu = "*"
 
 [dev-packages]
 
