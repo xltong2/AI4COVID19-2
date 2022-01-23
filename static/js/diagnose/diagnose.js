@@ -27,6 +27,57 @@ var url, div;
 
 
 // redirect
+
+
+window.onload = function Init() {
+    recordingCount = 0;
+    btnMicrophone = document.getElementById ("btn_microphone");
+    btnMicrophoneBorder = document.getElementById ("btn_onclick_border");
+
+    msgBeforeCoughing = document.getElementById ("msg_before_coughing");
+    msgFirstCoughing = document.getElementById ("msg_first_coughing");
+    msgFirstCoughDone = document.getElementById ("msg_first_cough_done");
+    msgSecondCoughing = document.getElementById ("msg_second_coughing");
+    msgSecondCoughDone = document.getElementById ("msg_second_cough_done");
+    msgThirdCoughing = document.getElementById ("msg_third_coughing");
+    msgThirdCoughDone = document.getElementById ("msg_third_cough_done");
+
+    audioFirstCoughing = document.getElementById("audio_first_coughing");
+    audioSecondCoughing = document.getElementById("audio_second_coughing");
+    audioThirdChoughing = document.getElementById("audio_third_coughing");
+
+    divRecording = document.getElementById ("div_recording");
+    divShowResult = document.getElementById ("div_view_result");
+    btnBack = document.getElementById ('btn_back');
+    processingResult = document.getElementById("processing_result");
+    viewResult = document.getElementById("view_result");
+
+    try {
+      window.AudioContext = window.AudioContext || window.webkitAudioContext;
+      navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia;
+      window.URL = window.URL || window.webkitURL;
+      audio_context = new AudioContext;
+    } catch (e) {
+      alert('No web audio support here! diagnose.js');
+    }
+    navigator.getUserMedia({audio: true}, startUserMedia, function(e) {alert('No live audio input: ' + e);});
+
+    if (btnMicrophone.addEventListener) {  // all browsers except IE before version 9
+        btnMicrophone.addEventListener ("mousedown", function () {
+            OnButtonDown (btnMicrophoneBorder);
+            startRecording();
+        }, false);
+        btnMicrophone.addEventListener ("mouseup", function () {
+            OnButtonUp (btnMicrophoneBorder);
+            if (recordingCount < 6) {
+                pauseRecording();
+            } else {
+                stopRecording();
+            }
+        }, false);
+    }
+}
+
 function redirect_dashboard() {
     location.href = '../dashboard';
 }
@@ -152,54 +203,5 @@ function Visibility () {
                 viewResult.style.display = "flex";
             }, 10000);
             break;
-    }
-}
-
-window.onload = function Init() {
-    recordingCount = 0;
-    btnMicrophone = document.getElementById ("btn_microphone");
-    btnMicrophoneBorder = document.getElementById ("btn_onclick_border");
-
-    msgBeforeCoughing = document.getElementById ("msg_before_coughing");
-    msgFirstCoughing = document.getElementById ("msg_first_coughing");
-    msgFirstCoughDone = document.getElementById ("msg_first_cough_done");
-    msgSecondCoughing = document.getElementById ("msg_second_coughing");
-    msgSecondCoughDone = document.getElementById ("msg_second_cough_done");
-    msgThirdCoughing = document.getElementById ("msg_third_coughing");
-    msgThirdCoughDone = document.getElementById ("msg_third_cough_done");
-
-    audioFirstCoughing = document.getElementById("audio_first_coughing");
-    audioSecondCoughing = document.getElementById("audio_second_coughing");
-    audioThirdChoughing = document.getElementById("audio_third_coughing");
-
-    divRecording = document.getElementById ("div_recording");
-    divShowResult = document.getElementById ("div_view_result");
-    btnBack = document.getElementById ('btn_back');
-    processingResult = document.getElementById("processing_result");
-    viewResult = document.getElementById("view_result");
-
-    try {
-      window.AudioContext = window.AudioContext || window.webkitAudioContext;
-      navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia;
-      window.URL = window.URL || window.webkitURL;
-      audio_context = new AudioContext;
-    } catch (e) {
-      alert('No web audio support here! diagnose.js');
-    }
-    navigator.getUserMedia({audio: true}, startUserMedia, function(e) {alert('No live audio input: ' + e);});
-
-    if (btnMicrophone.addEventListener) {  // all browsers except IE before version 9
-        btnMicrophone.addEventListener ("mousedown", function () {
-            OnButtonDown (btnMicrophoneBorder);
-            startRecording();
-        }, false);
-        btnMicrophone.addEventListener ("mouseup", function () {
-            OnButtonUp (btnMicrophoneBorder);
-            if (recordingCount < 6) {
-                pauseRecording();
-            } else {
-                stopRecording();
-            }
-        }, false);
     }
 }
