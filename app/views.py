@@ -1,4 +1,6 @@
 import os
+from datetime import datetime
+from sqlite3 import Timestamp
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib.auth import authenticate, login, logout
@@ -7,10 +9,10 @@ from django.views.decorators.csrf import csrf_exempt
 from django.core.files.storage import default_storage
 from django.core.files.storage import FileSystemStorage
 from django.core.files import File
+from numpy import diag
 
 from app.forms import RegistrationForm, AccountAuthenticationForm
-from app.models import Account, get_coughing_audio_filepath
-from app.forms import AudioForm
+from app.models import Account, CoughingResult
 
 from .knn.core import main
 
@@ -141,6 +143,17 @@ def diagnose_view(request):
         request.user.diagnose_code = diagnose_code
         request.user.save()
         
+        # save coughing result to history
+        testDateTime = datetime.now().strftime('%d/%m/%y %H:%M:%S')
+        diagnose_string = ''
+        if diagnose_code == 2:
+            diagnose_string = 'POSITIVE'
+        elif diagnose_code == 1:
+            diagnose_string = 'NEGATIVE'
+        else:
+            diagnose_string = 'N/A'
+        CoughingResult.objects.create(test_date_time=testDateTime, diagnose_status=diagnose_string, user=request.user)
+        
         context = {}    
         return render(request, 'accounts/diagnose.html', context)
     
@@ -165,6 +178,11 @@ def clinic_nearby_view(request):
 
 def history_view(request):
     context = {}
+    
+    # get the result list from logged in user
+    coughing_result_list = CoughingResult.objects.filter(user=request.user)
+    context['coughing_result_list'] = coughing_result_list
+    
     return render(request, 'accounts/history.html', context)
 
 def logout_view(request):

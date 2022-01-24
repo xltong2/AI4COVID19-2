@@ -3,7 +3,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import authenticate
 
 from app.models import Account
-from app.models import Audio
+# from app.models import Audio
 
 class RegistrationForm(UserCreationForm):
     
@@ -45,7 +45,3 @@ class AccountAuthenticationForm(forms.ModelForm):
 			if not authenticate(email=email, password=password):
 				raise forms.ValidationError("Invalid login")
 
-class AudioForm(forms.ModelForm):
-    class Meta:
-        model = Audio
-        fields = ('file', )

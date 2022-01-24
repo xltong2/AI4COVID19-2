@@ -16,19 +16,19 @@
 {% block content %}
 {% load static %}
 <div class="body-container">
-      <div class="history-item">
-            <span>DATE: 2021/12/05 03:10:00</span>
-            <span>RESULT: NEGATIVE</span>
-      </div>
-      <div class="history-item">
-            <span>DATE: 2021/12/02 02:20:00</span>
-            <span>RESULT: NEGATIVE</span>
-      </div>
-      <div class="history-item">
-            <span>DATE: 2021/12/01 01:00:00</span>
-            <span>RESULT: NEGATIVE</span>
-      </div>
+
+      {% if coughing_result_list %}
+            {% for item in coughing_result_list %}
+            <div class="history-item">
+                  <span>DATE: {{item.test_date_time}}</span>
+                  <span>RESULT: {{item.diagnose_status}}</span>
+            </div>
+            {% endfor %}
+
+      {% else %}
+            <div>Nothing else here</div>
+
+      {% endif %}
+
 </div>
 {% endblock %}
-</body>
-</html>
