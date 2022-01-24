@@ -46,8 +46,8 @@ class Account(AbstractBaseUser):
     
     email           = models.EmailField(verbose_name="email", max_length=60, unique=True)
     username        = models.CharField(max_length=30, unique=True)
-    # name            = models.CharField(max_length=64, default='', null=True)
-    # phone           = models.CharField(max_length=12, default='', unique=True, null=True)
+    name            = models.CharField(max_length=64, default="N/A")
+    phone           = models.CharField(max_length=12, default="N/A")
     date_joined     = models.DateTimeField(verbose_name="date joined", auto_now_add=True)
     last_login      = models.DateTimeField(verbose_name="last login", auto_now=True)
     is_admin        = models.BooleanField(default=False)
