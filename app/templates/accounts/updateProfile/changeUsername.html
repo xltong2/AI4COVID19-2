@@ -1,0 +1,65 @@
+{% extends './appBar-and-bottomBar.html' %}
+
+{% comment %} Page title {% endcomment %}
+{% block title %}Change password{% endblock %}
+
+{% comment %} appBar title {% endcomment %}
+{% block appBarTitle %}Change password{% endblock %}
+
+{% comment %} appBar action {% endcomment %}
+{% block appBarAction %}
+{% load static %}
+<a href="{% url 'profile' %}">
+	<img id='btnDrawer' src="{% static 'images/appBar-and-bottomBar/appBar-twisted-back-icon.png' %}">
+</a>
+{% endblock %}
+
+{% comment %} included css and javascript {% endcomment %}
+{% block file %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/change-profile/style.css' %}" />
+{% endblock %}
+
+{% comment %} body preload {% endcomment %}
+{% block preload %}onload = "Init()"{% endblock %}
+
+{% comment %} body content {% endcomment %}
+{% block content %}
+{% load static %}
+<div class="body-container">
+    <form name="form" method="post">
+        {% csrf_token %}
+        <div class="form-container">
+            <div class="form-container-grid">
+                
+                <div class="form-container-grid-item first-item">
+                    <span>New username</span>
+                </div>
+                <div class="form-container-grid-item">
+                    <div class="form-item">
+                        <input type="text" name="username" placeholder="Username" required/>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {% for field in update_form %}
+        <p>
+            {% for error in field.errors %}
+            <p style="color: red">{{error}}</p>
+            {% endfor %}
+        </p>
+        {% endfor %}
+
+        {% if update_form.non_field_errors %}
+        <div style="color: red">
+            <p>{{update_form.non_field_errors}}</p>
+        </div>
+        {% endif %}
+
+        <div class="button-container">
+            <button type="submit" name="update-btn" id="btnUpdate">UPDATE</button>
+        </div>
+    </form>
+</div>
+{% endblock %}

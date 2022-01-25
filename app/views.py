@@ -1,4 +1,6 @@
 import os
+from datetime import datetime
+from sqlite3 import Timestamp
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib.auth import authenticate, login, logout
@@ -7,10 +9,10 @@ from django.views.decorators.csrf import csrf_exempt
 from django.core.files.storage import default_storage
 from django.core.files.storage import FileSystemStorage
 from django.core.files import File
+from numpy import diag
 
-from app.forms import RegistrationForm, AccountAuthenticationForm
-from app.models import Account, get_coughing_audio_filepath
-from app.forms import AudioForm
+from app.forms import AccountUpdateEmailForm, AccountUpdateNameForm, AccountUpdatePhoneForm, AccountUpdateUsernameForm, RegistrationForm, AccountAuthenticationForm
+from app.models import Account, CoughingResult
 
 from .knn.core import main
 
@@ -76,33 +78,6 @@ def get_redirect_if_exists(request):
 			redirect = str(request.GET.get("next"))
 	return redirect
 
-# def menu_view(request, *args, **kwargs):
-#     context = {}
-    # user_id = kwargs.get("user_id")
-    # try:
-    #     account = Account.objects.get(pk=user_id)
-    # except:
-    #     return HttpResponse("Something went wrong.")
-    # if account:
-    #     context['id'] = account.id
-    #     context['username'] = account.username
-    #     context['email'] = account.email
-    #     context['profile_image'] = account.profile_image.url
-    #     context['hide_email'] = account.hide_email
-
-    #     # Define template variables
-    #     is_self = True
-    #     user = request.user
-    #     if user.is_authenticated and user != account:
-    #     	is_self = False
-    #     elif not user.is_authenticated:
-    #     	is_self = False
-
-    #     # Set the template variables to the values
-    #     context['is_self'] = is_self
-    #     context['BASE_URL'] = settings.BASE_URL
-    # return render(request, "accounts/menu.html", context)
-
 def dashboard_view(request):
     context = {}
     return render(request, 'accounts/dashboard.html', context)
@@ -141,6 +116,17 @@ def diagnose_view(request):
         request.user.diagnose_code = diagnose_code
         request.user.save()
         
+        # save coughing result to history
+        testDateTime = datetime.now().strftime('%d/%m/%y %H:%M:%S')
+        diagnose_string = ''
+        if diagnose_code == 2:
+            diagnose_string = 'POSITIVE'
+        elif diagnose_code == 1:
+            diagnose_string = 'NEGATIVE'
+        else:
+            diagnose_string = 'N/A'
+        CoughingResult.objects.create(test_date_time=testDateTime, diagnose_status=diagnose_string, user=request.user)
+        
         context = {}    
         return render(request, 'accounts/diagnose.html', context)
     
@@ -155,9 +141,65 @@ def profile_view(request):
     context = {}
     return render(request, 'accounts/profile.html', context)
 
-def change_profile_view(request):
+def change_password_view(request):
     context = {}
-    return render(request, 'accounts/changeProfile.html', context)
+    return render(request, 'accounts/updateProfile/changePassword.html', context)
+
+def change_email_view(request):
+    context = {}
+    
+    if 'update-btn' in request.POST:
+        form = AccountUpdateEmailForm(request.POST, instance=request.user)
+        if form.is_valid():
+            form.save()
+            return redirect('profile')
+    else:
+        form = AccountUpdateEmailForm(initial = {"email": request.user.email,})
+    
+    context['update_form'] = form
+    return render(request, 'accounts/updateProfile/changeEmail.html', context)
+
+def change_username_view(request):
+    context = {}
+    
+    if 'update-btn' in request.POST:
+        form = AccountUpdateUsernameForm(request.POST, instance=request.user)
+        if form.is_valid():
+            form.save()
+            return redirect('profile')
+    else:
+        form = AccountUpdateUsernameForm(initial = {"username": request.user.username,})
+    
+    context['update_form'] = form
+    return render(request, 'accounts/updateProfile/changeUsername.html', context)
+
+def change_name_view(request):
+    context = {}
+    
+    if 'update-btn' in request.POST:
+        form = AccountUpdateNameForm(request.POST, instance=request.user)
+        if form.is_valid():
+            form.save()
+            return redirect('profile')
+    else:
+        form = AccountUpdateNameForm(initial = {"name": request.user.name,})
+    
+    context['update_form'] = form
+    return render(request, 'accounts/updateProfile/changeName.html', context)
+
+def change_phone_view(request):
+    context = {}
+    
+    if 'update-btn' in request.POST:
+        form = AccountUpdatePhoneForm(request.POST, instance=request.user)
+        if form.is_valid():
+            form.save()
+            return redirect('profile')
+    else:
+        form = AccountUpdatePhoneForm(initial = {"phone": request.user.phone,})
+    
+    context['update_form'] = form
+    return render(request, 'accounts/updateProfile/changePhone.html', context)
 
 def clinic_nearby_view(request):
     context = {}
@@ -165,6 +207,11 @@ def clinic_nearby_view(request):
 
 def history_view(request):
     context = {}
+    
+    # get the result list from logged in user
+    coughing_result_list = CoughingResult.objects.filter(user=request.user)
+    context['coughing_result_list'] = coughing_result_list
+    
     return render(request, 'accounts/history.html', context)
 
 def logout_view(request):

@@ -40,19 +40,29 @@
                         <img id='btnDrawerInside' src="{% static 'images/appBar-and-bottomBar/appBar-menu-icon.png' %}">
                     </a>
                 </div>
-                <div class="menu-drawer-grid-item first-item">
+                {% comment %} <div class="menu-drawer-grid-item first-item">
                     <a href="{% url 'change-password' %}">
                         <span>Change password</span>
                     </a>
-                </div>
-                <div class="menu-drawer-grid-item">
-                    <a href="#">
+                </div> {% endcomment %}
+                <div class="menu-drawer-grid-item first-item">
+                    <a href="{% url 'change-username' %}">
                         <span>Change username</span>
                     </a>
                 </div>
                 <div class="menu-drawer-grid-item">
-                    <a href="#">
+                    <a href="{% url 'change-name' %}">
+                        <span>Change name</span>
+                    </a>
+                </div>
+                <div class="menu-drawer-grid-item">
+                    <a href="{% url 'change-email' %}">
                         <span>Change email</span>
+                    </a>
+                </div>
+                <div class="menu-drawer-grid-item">
+                    <a href="{% url 'change-phone' %}">
+                        <span>Change phone</span>
                     </a>
                 </div>
             </div>
@@ -86,19 +96,16 @@
     <!-- profile info -->
     <div class="lower-container">
         <div class="user-icon">
-            <img src="{% static 'images/profile/user-solid.svg' %}" alt="DiagCough" width="20"> &nbsp; &nbsp; &nbsp; &nbsp; N/A
+            <img src="{% static 'images/profile/user-solid.svg' %}" alt="DiagCough" width="20"> &nbsp; &nbsp; &nbsp; &nbsp; {{ user.name }}
         </div>
         <div class="user-icon">
             <img src="{% static 'images/profile/circle-user-solid.svg' %}" alt="DiagCough" width="20"> &nbsp; &nbsp; &nbsp; &nbsp; {{ user.username }}
         </div>
-            <div class="user-icon">
+        <div class="user-icon">
             <img src="{% static 'images/profile/envelope-solid.svg' %}" alt="DiagCough" width="20"> &nbsp; &nbsp; &nbsp; &nbsp; {{ user.email }}
         </div>
-            <div class="user-icon">
-            <img src="{% static 'images/profile/phone-solid.svg' %}" alt="DiagCough" width="20"> &nbsp; &nbsp; &nbsp; &nbsp; N/A
-        </div>
-            <div class="user-icon">
-            <img src="{% static 'images/profile/lock-solid.svg' %}" alt="DiagCough" width="20"> &nbsp; &nbsp; &nbsp; &nbsp; N/A
+        <div class="user-icon">
+            <img src="{% static 'images/profile/phone-solid.svg' %}" alt="DiagCough" width="20"> &nbsp; &nbsp; &nbsp; &nbsp; {{ user.phone }}
         </div>
     </div>
 

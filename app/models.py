@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 import os
@@ -29,11 +30,6 @@ class AccountManager(BaseUserManager):
         user.save(using=self._db)
         return user
   
-class Audio(models.Model):
-    filename = models.CharField(max_length=255, blank=True)
-    file = models.FileField(upload_to='media/')
-    uploaded_at = models.DateTimeField(auto_now_add=True)
-
 def get_profile_image_filepath(self, filename):
     return f'profile_images/{self.pk}/{"profile_image.png"}'
 
@@ -50,8 +46,8 @@ class Account(AbstractBaseUser):
     
     email           = models.EmailField(verbose_name="email", max_length=60, unique=True)
     username        = models.CharField(max_length=30, unique=True)
-    # name            = models.CharField(max_length=64)
-    # phone           = models.CharField(max_length=12, unique=True)
+    name            = models.CharField(max_length=64, default="N/A")
+    phone           = models.CharField(max_length=12, default="N/A")
     date_joined     = models.DateTimeField(verbose_name="date joined", auto_now_add=True)
     last_login      = models.DateTimeField(verbose_name="last login", auto_now=True)
     is_admin        = models.BooleanField(default=False)
@@ -85,3 +81,11 @@ class Account(AbstractBaseUser):
     
     def get_diagnose_code(self):
         return self.diagnose_code
+    
+class CoughingResult(models.Model):
+    test_date_time = models.CharField(max_length=32, blank=True)
+    diagnose_status = models.CharField(max_length=8, blank=True)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    
+    def __str__(self) -> str:
+        return super().__str__()
