@@ -37,7 +37,7 @@ def get_default_profile_image():
     return "profile_images/default_profile_images.png"
 
 def get_coughing_audio_filepath(self, filename):
-    return f'coughing_audio/{self.pk}/{"coughing_audio.wav"}'
+    return f'coughing_audio{self.pk}{"coughing_audio.wav"}'
 
 def get_default_coughing_audio():
     return "coughing_audio/default_coughing_audio.wav"
