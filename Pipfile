@@ -15,6 +15,7 @@ pandas = "*"
 librosa = "*"
 comet-ml = "*"
 tensorflow-cpu = "*"
+ffmpeg = "*"
 
 [dev-packages]
 
